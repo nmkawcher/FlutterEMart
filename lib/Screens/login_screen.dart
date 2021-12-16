@@ -1,3 +1,4 @@
+import 'package:e_mart/Screens/home_page.dart';
 import 'package:e_mart/Screens/registration_page.dart';
 import 'package:e_mart/utils/text_style.dart';
 import 'package:flutter/material.dart';
@@ -63,7 +64,10 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(
               height: 25,
             ),
-            ElevatedButton(onPressed: (){}, child:
+            ElevatedButton(onPressed: (){
+              Navigator.pushReplacement(context, 
+              MaterialPageRoute(builder: (context)=>HomePage()));
+            }, child:
             Text("Login")
             ),
             SizedBox(
