@@ -1,4 +1,5 @@
 import 'package:e_mart/Screens/product_details.dart';
+import 'package:e_mart/model/product_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 class HomePage extends StatefulWidget {
@@ -10,14 +11,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-  List<String>imageList=[
-    "assets/images/login_1.png",
-    "assets/images/login_2.png",
-    "assets/images/sign_up.png",
-    "assets/images/undraw_design.png",
-    "assets/images/undraw_messenger.png",
-    "assets/images/Image Banner 2.png"
-  ];
+
   bool isClick=false;
 
   @override
@@ -166,7 +160,7 @@ class _HomePageState extends State<HomePage> {
                 Flexible(
                   child: GridView.builder(
                     physics: NeverScrollableScrollPhysics(),
-                    itemCount: imageList.length,
+                    itemCount: productList.length,
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       crossAxisSpacing: 5.0,
@@ -177,8 +171,12 @@ class _HomePageState extends State<HomePage> {
                       return GestureDetector(
                         onTap: (){
                           Navigator.push(context, MaterialPageRoute(builder: (context){
-                          return  ProductDetailsScreen();
+                            return ProductDetailsScreen(model: productList[index]);
                           }));
+                        // Navigator.pushNamed(context, ProductDetailsScreen.routesName,arguments: ProductDetailsArgument(productModel: productList[index]));
+                        /*  Navigator.push(context, MaterialPageRoute(builder: (context){
+                          return  ProductDetailsScreen(model: productList[index],);
+                          }));*/
                         },
                         child: Container(
                           height: 200,
@@ -192,7 +190,7 @@ class _HomePageState extends State<HomePage> {
                                 children: [
                                   Stack(
                                     children: [
-                                      Image.asset(imageList[index],height: 160,width: 190,fit: BoxFit.cover,),
+                                      Image.asset(productList[index].image,height: 160,width: 190,fit: BoxFit.cover,),
                                       Positioned(
                                         right: 5,
                                         top: 5,
@@ -234,3 +232,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+
+
+

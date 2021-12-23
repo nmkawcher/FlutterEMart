@@ -1,7 +1,10 @@
+import 'package:e_mart/model/product_model.dart';
 import 'package:flutter/material.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
-  const ProductDetailsScreen({Key? key}) : super(key: key);
+  const ProductDetailsScreen( {Key? key, required this.model}) : super(key: key);
+  final ProductModel model;
+
 
   @override
   _ProductDetailsScreenState createState() => _ProductDetailsScreenState();
@@ -10,10 +13,12 @@ class ProductDetailsScreen extends StatefulWidget {
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   @override
   Widget build(BuildContext context) {
+   // final ProductDetailsArgument ar= ModalRoute.of(context)!.settings.arguments as ProductDetailsArgument;
+    ProductModel model=widget.model;
     return Scaffold(
       appBar: AppBar(
-        title: Text("Fresh Apple"),
-        leading: Icon(Icons.arrow_back_sharp,color: Colors.white,),
+        title: Text(model.productName),
+        leading: IconButton(onPressed: (){Navigator.pop(context);},icon: Icon(Icons.arrow_back_sharp,color: Colors.white,),),
 
       ),
       body: Padding(
@@ -26,7 +31,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 decoration: BoxDecoration(
                   color: Colors.white
                 ),
-                child: Image.asset("assets/images/tshirt.png",height: 100,width: 100,),
+                child: Image.asset(model.image,height: 100,width: 100,),
               ),
               SizedBox(height: 10,),
               Row(
@@ -75,9 +80,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       text: "Description\n",style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold,color: Colors.lightBlue),
                       children: [
                         TextSpan(
-                          text: "Filler text is text that shares some characteristics of a real written text, but is random or otherwise generated. It may be used to display a sample of fonts, generate text for testing, or to spoof an e-mail spam filter"
-                              "Filler text is text that shares some characteristics of a real written text, but is random or otherwise generated. It may be used to display a sample of fonts, generate text for testing, or to spoof an e-mail spam filter"
-                              "Filler text is text that shares some characteristics of a real written text, but is random or otherwise generated. It may be used to display a sample of fonts, generate text for testing, or to spoof an e-mail spam filter",style: TextStyle(
+                          text: model.productDetails,style: TextStyle(
                           fontSize: 14,color: Colors.black54
                         )
 
@@ -94,3 +97,11 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     );
   }
 }
+
+class ProductDetailsArgument{
+  final ProductModel productModel;
+  ProductDetailsArgument({required this.productModel});
+}
+
+
+
